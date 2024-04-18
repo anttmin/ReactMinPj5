@@ -1,110 +1,62 @@
 import React, { useState } from "react";
-import {
-  UserIcon,
-  LockClosedIcon,
-  EnvelopeIcon,
-} from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 
-const App = () => {
-  const [register,SetRegister] = useState(true)
-  console.log(register);
+const App = ({ numberOfIcons = 5 }) => {
+  const [Open, setOpen] = useState(true);
+  const [Num, SetNum] = useState(0);
+
   return (
-    <div className="pt-5">
-      <div className={`wrapper relative  bg-yellow-100 h-[400px] w-[400px]`}>
-        <div className={`w-[400px] rounded-md  ${!register ? "translate-x-[-400px]" :"translate-x-[0px]"} `}>
-          <form className="p-6">
-            <h2 className="font-bold text-3xl text-center">Login</h2>
-            <label className="font-bold">Name</label>
-            <div className="rounded-[5px]  w-full bg-transparent relative  border-current Input mb-2">
-              <input
-                type="text"
-                placeholder="Enter your Name"
-                className=" border-transparent  bg-transparent outline-none p-1 text-black"
-              />
-              <UserIcon className="w-5 h-5 text-black absolute right-1 top-1" />
-            </div>
+    <div className="wrapper bg-slate-700 mt-4 rounded-lg flex relative">
+      <div className={`w-[400px] h-auto p-5 ${!Open ?"translate-x-[-400px]" :"translate-x-[0px]"}`}>
+        <StarIcon className="w-6 h-6 text-orange-600" />
+        <h2 className="font-bold text-2xl text-white">How did We do?</h2>
+        <p className="text-gray-400 mt-3 mb-3">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto
+          ipsam atque voluptatibus, recusandae aut sint libero, architecto
+          sapiente, consectetur sequi natus. Deleniti modi aspernatur
+          perspiciatis neque iste ea hic?
+        </p>
+        <div className="Btn flex justify-between mb-2">
+          {[...Array(numberOfIcons)].map((_, index) => {
+            const currentRating = index + 1;
+           return(
+            <p key={index}>
+            <StarIcon
+              className="w-5 h-5 text-white hover:text-orange-600"
+              value={index} onClick={()=>SetNum(currentRating)}
+            />
+          </p>
+           )
+          })}
+        </div>
+        <div
+          className="bg-orange-600 w-[100%] text-center rounded-md p-1"
+          onClick={() => setOpen(!Open)}
+        >
+          <button className="text-white">Submit</button>
+        </div>
+      </div>
 
-            <label className="font-bold">Password</label>
-            <div className="rounded-md w-full bg-transparent relative  border-current Input mb-2">
-              <input
-                type="password"
-                placeholder="Enter Your Password"
-                className="border-transparent outline-none p-1 bg-transparent text-black"
-              />
-              <LockClosedIcon className="w-5 h-5 text-black absolute  right-1 top-1" />
-            </div>
-
-            <label className="font-bold">Password</label>
-            <div className="rounded-md w-full bg-transparent relative  border-current Input">
-              <input
-                type="password"
-                placeholder="Enter Your Password"
-                className="border-transparent outline-none p-1 bg-transparent text-black"
-              />
-              <LockClosedIcon className="w-5 h-5 text-black absolute  right-1 top-1" />
-            </div>
-
-            <div className="flex justify-between mt-3">
-              <div>
-                <input type="checkbox" />
-                <span>RemeberMe</span>
-              </div>
-
-              <p className="ml-5 hover:underline">Forget Password?</p>
-            </div>
-
-            <div className="w-full h-auto bg-slate-100 text-center rounded-md mt-2 mb-2 p-1 hover:bg-black hover:text-white">
-              <button>Login</button>
-            </div>
-
-            <div className="flex justify-between">
-              <span>Don't have an account?</span>
-              <span className="font-bold hover:underline" onClick={()=>SetRegister(false)}>Register</span>
-            </div>
-          </form>
+      <div className={`w-[400px] h-auto  absolute   p-3 ${!Open ?"translate-x-[0px]" :"translate-x-[400px]"}`}>
+        <img
+          src="https://png.pngtree.com/png-clipart/20230923/original/pngtree-emoticonbased-rating-scale-providing-feedback-and-ratings-vector-eps-10-included-png-image_12665327.png"
+          alt="img"
+          className="w-[200px] mx-auto rounded-[20px] h-auto"
+        />
+        <div className="bg-slate-800 w-[150px] h-auto p-1 mx-auto rounded-md mt-3">
+          <p className="text-white text-sm text-center">Rate 5 out of {Num}</p>
         </div>
 
-        <div className={`w-[400px] Ptwo ${!register ? "translate-x-[0px]" : "translate-x-[400px]"}`}>
-          <form className="p-6">
-            <h2 className="font-bold text-3xl text-center">Register</h2>
-            <label className="font-bold">Name</label>
-            <div className="rounded-[5px]  w-full bg-transparent relative  border-current Input mb-2">
-              <input
-                type="text"
-                placeholder="Enter your Name"
-                className=" border-transparent  bg-transparent outline-none p-1 text-black"
-              />
-              <UserIcon className="w-5 h-5 text-black absolute right-1 top-1" />
-            </div>
+        <h2 className="text-white text-2xl font-bold text-center mt-2">
+          Thank You!
+        </h2>
 
-
-            <label className="font-bold">Mail</label>
-            <div className="rounded-md w-full bg-transparent relative  border-current Input">
-              <input
-                type="email"
-                placeholder="Enter Your Password"
-                className="border-transparent outline-none p-1 bg-transparent text-black"
-              />
-              <EnvelopeIcon className="w-5 h-5 text-black absolute  right-1 top-1" />
-            </div>
-
-            <div className="flex justify-between mt-3">
-              <div>
-                <input type="checkbox" />
-                <span>RemeberMe</span>
-              </div>
-
-              <p className="ml-5 hover:underline">Forget Password?</p>
-            </div>
-
-            <div className="w-full h-auto bg-slate-100 text-center rounded-md mt-2 mb-2 p-1 hover:bg-black hover:text-white">
-              <button>Register</button>
-            </div>
-
-            <div className="flex justify-between">
-              <span className="font-bold hover:underline" onClick={()=>SetRegister(true)}>Login</span>
-            </div>
-          </form>
+        <div className="text-center">
+          <p className="text-white text-sm">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla rem
+            expedita aspernatur consectetur ipsam assumenda veritatis enim ea?
+            Dolorem modi illo consectetur, molestias sapiente et commodi nisi
+          </p>
         </div>
       </div>
     </div>
@@ -112,5 +64,4 @@ const App = () => {
 };
 
 export default App;
-
-
+//${!Open ?"translate-x-[400px]" :"translate-x-[0px]"}

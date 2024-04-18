@@ -26,22 +26,19 @@ html,body{
 @layer components {
 
     .wrapper{
-        display: flex;
         overflow: hidden;
-
     }
 
-   
-
-    .Ptwo{
-        position: absolute;
-        transform: translateX(400px);
-        
-    }
-
-    .Input{
-        border: 1px solid black;
-    }
+   .Btn p{
+    width: 30px;
+    height: 30px;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+   }
     
   }
 
